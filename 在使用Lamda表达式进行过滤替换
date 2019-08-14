@@ -1,0 +1,28 @@
+    @org.junit.Test
+    public void test() {
+
+
+        List<Integer> objects = new ArrayList<>();
+        objects.add(3);
+        objects.add(4);
+        objects.add(5);
+        objects.add(4);
+        System.out.println("处理后的集合-------" +objects);
+
+        List<Integer> collect = objects.stream().filter(Integer -> {
+            if (Integer.equals(4)) {
+                int i = objects.indexOf(Integer);
+                objects.set(i, 7);
+            }
+            return true;
+        }).collect(Collectors.toList());
+        System.out.println("处理后的集合-------" + objects);
+        System.out.println("处理后使用collect生成的集合-------" +collect);
+    }
+		//运行之后的结果 
+			处理后的集合-------[3, 4, 5, 4]
+			处理后的集合-------[3, 7, 5, 7]
+			处理后使用collect生成的集合-------[3, 4, 5, 4]
+			
+			
+			//在进行处理之后 objects 的数组里的值确实变了， 处理后的生成的collect集合应与 处理后的objects一样 然而与处理前的一样
